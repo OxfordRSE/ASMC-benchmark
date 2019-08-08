@@ -40,7 +40,7 @@ jobs:
 
   - script: |
       source venv/bin/activate
-      python asmc-benchmark.py
+      venv/bin/python asmc-benchmark.py
     workingDirectory: $(benchDir)
     displayName: Run benchmark
     failOnStderr: true  # any printing to stderr results in a failure
