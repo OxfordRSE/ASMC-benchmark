@@ -34,6 +34,10 @@ jobs:
     workingDirectory: $(benchDir)
     displayName: Update asmc-benchmark repo
 
+  - script: git submodule update --init --recursive
+    workingDirectory: $(benchDir)
+    displayName: Update ASMC submodule
+
   - script: |
       source venv/bin/activate
       python asmc-benchmark.py
