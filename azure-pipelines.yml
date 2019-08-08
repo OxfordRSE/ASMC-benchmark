@@ -1,0 +1,43 @@
+#
+# ASMC benchmarking
+#
+
+trigger: none
+
+pr: none
+
+schedules:
+- cron: "0 * * * *"
+  displayName: Hourly next benchmark
+  branches:
+    include:
+    - master
+  always: true
+
+jobs:
+
+- job: RunEverything
+  
+  displayName: Master job to run all steps
+  
+  variables:
+    benchDir: /home/fergus/asmc_temp/ASMC-benchmark
+
+  pool:
+    name: 'singularity'
+
+  steps:
+
+  - checkout: none # don't actually check out source - we work on an existing directory
+
+  - script: git pull
+    workingDirectory: $(benchDir)
+    displayName: Update asmc-benchmark repo
+
+  - script: |
+      source venv/bin/activate
+      python asmc-benchmark.py
+    workingDirectory: $(benchDir)
+    displayName: Run benchmark
+    failOnStderr: true  # any printing to stderr results in a failure
+    timeoutInMinutes: 45  # 0.75 hour failsafe on script
