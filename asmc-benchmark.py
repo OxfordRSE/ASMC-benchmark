@@ -1,4 +1,5 @@
 import os
+import re
 import subprocess
 import time
 
@@ -47,16 +48,23 @@ def benchmark_example():
 
     begin = time.time()
 
-    subprocess.call([
+    output = subprocess.check_output([
         asmc_exe,
         '--decodingQuantFile', decoding_file,
         '--hapsFileRoot', haps_file,
         '--posteriorSums',
-    ])
+    ]).decode()
 
-    end = time.time()
+    total_time = begin - time.time()
 
-    return end - begin
+    m = re.search(r'Read precomputed decoding info in\s+(\d+\.?\d+)\s+seconds', output)
+    print(m.group(1))
+
+    m = re.search(r'Read haps in\s+(\d+\.?\d+)\s+seconds', output)
+    print(m.group(1))
+
+    m = re.search(r'Decoded\s+\d+\s+pairs in\s+(\d+\.?\d+)\s+seconds', output)
+    print(m.group(1))
 
 
 if __name__ == "__main__":
