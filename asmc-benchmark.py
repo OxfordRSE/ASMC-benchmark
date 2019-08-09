@@ -42,7 +42,7 @@ def benchmark_example():
         'Expected to find ASMC_exe at {}'.format(asmc_exe)
     assert os.path.isfile(decoding_file),\
         'Expected to find decoding quantities file at {}'.format(decoding_file)
-    assert os.path.isfile(haps_file),\
+    assert os.path.isfile(haps_file + '.samples'),\
         'Expected to find haps file at {}'.format(haps_file)
 
     begin = time.time()
