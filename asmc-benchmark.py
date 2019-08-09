@@ -27,13 +27,13 @@ def benchmark_example():
     asmc_exe = os.path.join(build_dir, 'ASMC_exe')
     decoding_file = os.path.join(
         asmc_dir,
-        'FILES'
+        'FILES',
         'DECODING_QUANTITIES',
         '30-100-2000.decodingQuantities.gz'
     )
     haps_file = os.path.join(
         asmc_dir,
-        'FILES'
+        'FILES',
         'EXAMPLE',
         'exampleFile.n300.array'
     )
