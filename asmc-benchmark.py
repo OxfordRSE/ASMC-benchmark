@@ -55,16 +55,40 @@ def benchmark_example():
         '--posteriorSums',
     ]).decode()
 
-    total_time = begin - time.time()
+    # The total time for the entire subprocess
+    time_total = begin - time.time()
 
-    m = re.search(r'Read precomputed decoding info in\s+(\d+\.?\d+)\s+seconds', output)
-    print(m.group(1))
+    """
+    Get some timing info out of the ASMC script output
+    """
+    m_read_decoding_info = re.search(
+        r'Read precomputed decoding info in\s+(\d+\.?\d+)\s+seconds',
+        output
+    )
 
-    m = re.search(r'Read haps in\s+(\d+\.?\d+)\s+seconds', output)
-    print(m.group(1))
+    time_read_dec = None
+    if m_read_decoding_info is not None:
+        time_read_dec = float(m_read_decoding_info.group(1))
 
-    m = re.search(r'Decoded\s+\d+\s+pairs in\s+(\d+\.?\d+)\s+seconds', output)
-    print(m.group(1))
+    m_read_haps = re.search(
+        r'Read haps in\s+(\d+\.?\d+)\s+seconds',
+        output
+    )
+
+    time_read_haps = None
+    if m_read_haps is not None:
+        time_read_haps = float(m_read_haps.group(1))
+
+    m_decode_pairs = re.search(
+        r'Decoded\s+\d+\s+pairs in\s+(\d+\.?\d+)\s+seconds',
+        output
+    )
+
+    time_decode = None
+    if m_decode_pairs is not None:
+        time_decode = float(m_decode_pairs.group(1))
+
+    return time_total, time_read_dec, time_read_haps, time_decode
 
 
 if __name__ == "__main__":
