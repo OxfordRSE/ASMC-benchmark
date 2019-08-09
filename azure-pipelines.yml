@@ -22,6 +22,7 @@ jobs:
   
   variables:
     benchDir: /home/fergus/asmc_temp/ASMC-benchmark
+    buildDir: $(benchDir)/__asmc_build
 
   pool:
     name: 'singularity'
@@ -38,9 +39,23 @@ jobs:
     workingDirectory: $(benchDir)
     displayName: Update ASMC submodule
 
-  - script: |
-      python3 asmc-benchmark.py
+  - script: mkdir -p $(benchDir)
+    displayName: Create build directory
+
+  - script: cmake ../ASMC -DCMAKE_BUILD_TYPE=Release
+    workingDirectory: $(buildDir)
+    displayName: CMake configure step
+
+  - script: cmake --build . -j -- ASMC_exe
+    workingDirectory: $(buildDir)
+    displayName: CMake build step
+
+  - script: python3 asmc-benchmark.py
     workingDirectory: $(benchDir)
     displayName: Run benchmark
     failOnStderr: true  # any printing to stderr results in a failure
     timeoutInMinutes: 45  # 0.75 hour failsafe on script
+
+  - script: rm -rf $(buildDir)
+    condition: always()
+    displayName: Clean build directory
