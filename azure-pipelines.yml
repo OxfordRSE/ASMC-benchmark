@@ -39,8 +39,7 @@ jobs:
     displayName: Update ASMC submodule
 
   - script: |
-      source venv/bin/activate
-      venv/bin/python asmc-benchmark.py
+      python3 asmc-benchmark.py
     workingDirectory: $(benchDir)
     displayName: Run benchmark
     failOnStderr: true  # any printing to stderr results in a failure
