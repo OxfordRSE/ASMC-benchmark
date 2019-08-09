@@ -31,11 +31,11 @@ jobs:
 
   - checkout: none # don't actually check out source - we work on an existing directory
 
-  - script: git pull
+  - script: git pull --recurse-submodules
     workingDirectory: $(benchDir)
-    displayName: Update asmc-benchmark repo
+    displayName: Update asmc-benchmark repo & ASMC submodule
 
-  - script: git submodule update --init --recursive
+  - script: git submodule foreach git pull origin master
     workingDirectory: $(benchDir)
     displayName: Update ASMC submodule
 
