@@ -41,7 +41,7 @@ jobs:
     workingDirectory: $(benchDir)
     displayName: Ensure ASMC submodule is at origin/master
 
-  - script: mkdir -p $(benchDir)
+  - script: mkdir -p $(buildDir)
     displayName: Create build directory
 
   - script: cmake ../ASMC -DCMAKE_BUILD_TYPE=Release
