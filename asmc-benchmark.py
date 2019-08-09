@@ -58,7 +58,7 @@ def benchmark_example():
     ]).decode()
 
     # The total time for the entire subprocess
-    time_total = begin - time.time()
+    time_total = time.time() - begin
 
     """
     Get some timing info out of the ASMC script output
