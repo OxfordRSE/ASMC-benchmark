@@ -31,13 +31,15 @@ jobs:
 
   - checkout: none # don't actually check out source - we work on an existing directory
 
-  - script: git pull --recurse-submodules
+  - script: |
+      git fetch --all
+      git reset --hard origin/master
     workingDirectory: $(benchDir)
-    displayName: Update asmc-benchmark repo & ASMC submodule
+    displayName: Ensure ASMC-benchmark is at origin/master
 
   - script: git submodule foreach git pull origin master
     workingDirectory: $(benchDir)
-    displayName: Update ASMC submodule
+    displayName: Ensure ASMC submodule is at origin/master
 
   - script: mkdir -p $(benchDir)
     displayName: Create build directory
