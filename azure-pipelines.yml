@@ -23,7 +23,7 @@ jobs:
   displayName: Master job to run all steps
   
   variables:
-    benchDir: /data/localhost/cooper/ASMC-benchmark
+    benchDir: /data/rockpigeon/cooper/ASMC-benchmark
     buildDir: $(benchDir)/__asmc_build
 
   pool:
