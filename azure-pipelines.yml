@@ -1,5 +1,7 @@
 #
-# ASMC benchmarking
+# ASMC benchmarking. This script is assumed to be running on 
+# Stats department computer "rockpigeon", via an agent running
+# inside a Singularity instance.
 #
 
 trigger: none
@@ -21,7 +23,7 @@ jobs:
   displayName: Master job to run all steps
   
   variables:
-    benchDir: /home/fergus/asmc_temp/ASMC-benchmark
+    benchDir: /data/localhost/cooper/ASMC-benchmark
     buildDir: $(benchDir)/__asmc_build
 
   pool:
