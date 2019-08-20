@@ -11,6 +11,7 @@ Fergus has access to `rockpigeon`.
 
 The Pipeline is run hourly and adds four benchmarking times to a local sql database.
 An SVG graph is produced for each of the benchmarking times.
+Each graph contains a single point per ASMC commit (unless multiple commits occur inside an hour), with all profiling times for a single commit being grouped and represented as a mean and standard deviation.
 
 The database and SVG images are backed up daily via a cron job running on `rockpigeon`, which backs up to Fergus's home space on the Statistics network.
 
