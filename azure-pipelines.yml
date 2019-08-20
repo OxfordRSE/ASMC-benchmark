@@ -60,9 +60,6 @@ jobs:
     failOnStderr: true  # any printing to stderr results in a failure
     timeoutInMinutes: 45  # 0.75 hour failsafe on script
 
-  - script: echo $(Build.ArtifactStagingDirectory)
-    displayName: Where is the staging directory
-
   - task: CopyFiles@2
     inputs:
       sourceFolder: $(benchDir)
