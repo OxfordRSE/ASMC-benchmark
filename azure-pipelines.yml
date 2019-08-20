@@ -60,6 +60,22 @@ jobs:
     failOnStderr: true  # any printing to stderr results in a failure
     timeoutInMinutes: 45  # 0.75 hour failsafe on script
 
+  - script: echo $(Build.ArtifactStagingDirectory)
+    displayName: Where is the staging directory
+
+  - task: CopyFiles@2
+    inputs:
+      sourceFolder: $(benchDir)
+      contents: '*.svg'
+      targetFolder: $(Build.ArtifactStagingDirectory)
+      cleanTargetFolder: true
+      overWrite: true
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: $(Build.ArtifactStagingDirectory)
+      artifactName: profiles
+
   - script: rm -rf $(buildDir)
     condition: always()
     displayName: Clean build directory
